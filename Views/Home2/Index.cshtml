@@ -1,0 +1,53 @@
+﻿@using Health.Models;
+@model IEnumerable<PersonInfo>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<p>
+    <a asp-controller="Home" asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            @{/*<th>
+                @Html.DisplayNameFor(model => model.Cat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PersonInfo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Spec)
+            </th>
+            <th></th>*/}
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @item.FName
+            </td>
+            @{/*<td>
+                @Html.DisplayFor(modelItem => item.PersonInfo.PersonInfoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Spec.SpecId)
+            </td>
+            <td>
+                @{/*<a asp-action="Edit" asp-route-id="@item.DocId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.DocId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.DocId">Delete</a>
+            </td>*/}
+        </tr>
+}
+    </tbody>
+</table>
+    <a asp-action="Creat">Delete</a>
+</body>
+</html>

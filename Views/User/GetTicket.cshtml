@@ -1,0 +1,64 @@
+﻿@model Health.Models.Ticket
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/index.css" />
+}
+<div class="index-otch">
+    <form asp-controller="User" asp-action="GetTicket" method="post" class="form log">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-unit left">
+
+        <div class="form-group">
+                <label asp-for="FName" class="control-label">Фамилия</label><br />
+                <input asp-for="FName" class="form-control"><br />
+            <span asp-validation-for="FName"></span>
+        </div> 
+
+        <div class="form-group">
+                <label asp-for="SName" class="control-label">Имя</label><br />
+                <input asp-for="SName" class="form-control"><br />
+            <span asp-validation-for="SName"></span>
+        </div>
+
+        <div class="form-group">
+                <label asp-for="FatherName" class="control-label">Отчество</label><br />
+                <input asp-for="FatherName" class="form-control"><br />
+        </div>
+
+        <div class="form-group">
+                <label asp-for="Birthday" class="control-label">Дата рождения</label><br />
+                <input type="date" asp-for="Birthday" class="form-control"><br />
+            <span asp-validation-for="Birthday"></span>
+        </div>
+
+        <div class="form-group">
+                <label asp-for="PassNum" class="control-label">Номер паспорта</label><br />
+                <input asp-for="PassNum" class="form-control" maxlength="4"><br />
+            <span asp-validation-for="PassNum"></span>
+        </div>
+
+        <div class="form-group">
+                <label asp-for="PassSeries" class="control-label">Серия паспорта</label><br />
+                <input asp-for="PassSeries" class="form-control" maxlength="6"><br />
+            <span asp-validation-for="PassSeries"></span>
+        </div>
+
+        <div class="form-group">
+                <label asp-for="AppDate" class="control-label">Дата приёма</label><br />
+                <input type="datetime-local" asp-for="AppDate" class="form-control"><br />
+            <span asp-validation-for="AppDate"></span>
+            <span >@ViewBag.WrongDate</span>
+        </div>
+
+        <div class="form-group">
+                <label asp-for="SpecId" class="control-label">Специализация врача</label><br />
+                <select asp-for="SpecId" class="form-control" asp-items="ViewBag.SpecId"></select><br />
+            <span asp-validation-for="SpecId"></span>
+        </div>
+        </div><br />
+
+        <div class="form-unit">
+            <input type="submit" value="Записаться" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

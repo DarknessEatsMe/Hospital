@@ -1,0 +1,63 @@
+﻿@using Health.ViewModels;
+@model List<dynamic>;
+
+@{
+    ViewData["Title"] = "Нагрузка на врачей";
+    int? sum = 0;
+
+    foreach(var item in Model)
+    {
+        sum += item.Count;
+    }
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/index.css" />
+}
+<div class="index-otch">
+    <div class="unit">
+        <form asp-action="WorkLoad" asp-controller="Doctor" method="post">
+            <div class="form-unit">
+                <div>
+                    <label for="dateFrom">Дата с: </label>
+                    <input type="datetime-local" name="dateFrom" id="from" value="@ViewBag.From" required/>
+                </div>
+                <div>
+                    <label for="dateTo">Дата с: </label>
+                    <input type="datetime-local" name="dateTo" id="to" value="@ViewBag.To" required /> <br /><br />
+                </div>
+            </div>
+            <div class="form-unit">
+                <input type="submit" id="find" value="Загрузить отчет" />
+            </div>
+
+        </form>
+    </div>
+
+    <div class="unitt">
+        <hr class="hr-otch"/>
+    </div>
+
+    <div class="unit">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Врач</th>
+                    <th>Нагрузка, кол-во записей</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Count</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <p>Всего обращений: @sum</p>
+    </div>
+
+    </div>

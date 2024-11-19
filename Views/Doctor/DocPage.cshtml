@@ -1,0 +1,43 @@
+﻿@model Health.ViewModels.DocPageModels;
+
+@{
+    ViewData["Title"] = "Страница пользователя - " + @Model.Person?.FName + " " + @Model.Person?.SName + " " + @Model.Person?.FatherName;
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/index.css" />
+}
+<div class="index-otch col">
+    <div class="unit">
+
+    <h2>Талоны на @DateTime.Now.Date.ToString("D")</h2>
+    </div>
+    
+    <div class="unit">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Отчество</th>
+                <th>Дата рождения</th>
+                <th>Дата приема</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var ticket in Model.Tickets)
+            {
+                <tr>
+                    <td>@ticket.FName</td>
+                    <td>@ticket.SName</td>
+                    <td>@ticket.FatherName</td>
+                    <td>@ticket.Birthday</td>
+                    <td>@ticket.AppDate.ToString("f")</td>
+                    <td><a asp-controller="Doctor" asp-action="Appointment" asp-route-id="@ticket.TicketId">Начать прием</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+</div>

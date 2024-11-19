@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Health.Models.Diagnosis>;
+@{
+    ViewData["Title"] = "Все талоны";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/index.css" />
+}
+<div class="index-otch">
+    <div class="unit">
+        <form asp-action="GetDiagnoses" asp-controller="Doctor" method="post" class="form">
+        <div class="form-unit">
+            <div>
+                <label for="Name">Название: </label>
+                <input type="text" name="Name" id="from" value="@ViewBag.Name" required />
+            </div>
+        </div>
+        <br />
+        <div class="form-unit">
+            <input type="submit" id="find" value="Найти" />
+        </div>
+    </form>
+    </div>
+    
+    <div class="unitt">
+        <hr class="hr-otch" />
+    </div>
+
+    <div class="unit">
+        <table class="table">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Код в МКБ-10</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var diag in Model)
+            {
+                <tr>
+                    <td>@diag.DiagName</td>
+                    <td>@diag.MkbCode</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+</div>

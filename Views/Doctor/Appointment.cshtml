@@ -1,0 +1,200 @@
+﻿@model Health.ViewModels.AppointmentModels;
+@{
+    ViewData["Title"] = "Прием - " + @Model.Ticket.TicketId;
+    string? cardInfo = "отсутствует.";
+    bool cardInvalid = true;
+    string createButDisplay = "inline-block";
+    int docId = ViewBag.DocId;
+    byte? discount = 0;
+
+    if(Model.Info?.Discount != null)
+    {
+        discount = Model.Info.Discount;
+    }
+
+    if (Model.Card?.ClientCardId != null)
+    {
+        cardInfo = Convert.ToString(Model.Card?.CardNum);
+        cardInvalid = false;
+        createButDisplay = "none";
+    }
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/index.css" />
+}
+
+<dic class="index-otch col">
+
+    <a asp-controller="Doctor" asp-action="DocPage" asp-route-id="@docId">В ЛК</a>
+    <hr />
+
+    <div>
+        <div class="unit">
+            <h2>Информация о пациенте</h2>
+        </div>
+        <div class="flex-unit col">
+            <span class="info">Фамилия: @Model.Ticket.FName</span>
+            <span class="info">Имя: @Model.Ticket.SName</span>
+            <span class="info">Отчество: @Model.Ticket.FatherName</span>
+            <span class="info">Дата рождения: @Model.Ticket.Birthday</span>
+        </div>
+    </div>
+
+    <h2>Мед. карточка @cardInfo </h2>
+    <div>
+        <a style="display:@createButDisplay;" asp-controller="Doctor" asp-action="CreateCard" asp-route-id="@Model.Ticket.TicketId">Создать карточку</a>
+
+        @if(Model.Appointments != null)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Номер приема</th>
+                        <th>Дата</th>
+                        <th>Услуга</th>
+                        <th>Диагноз</th>
+                        <th>Цена</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var app in Model.Appointments)
+                    {
+                        <tr>
+                            <td>@app.AppId</td>
+                            <td>@app.AppDate</td>
+                            <td>@app.DocName</td>
+                            <td>@app.DiagName</td>
+                            <td>@app.Price</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else if(Model.Card != null)
+        {
+            <p>Приёмов еще не было</p>
+        }
+        else
+        {
+            
+        }
+
+    </div>
+
+    <h2>Заключение</h2>
+    <div>
+        <form asp-controller="Doctor" asp-action="Appointment" method="post" id="form">
+            <input type="hidden" value="@Model.Ticket.TicketId" name="TicketId" required />
+            <input type="hidden" name="CardId" id="cardId" value="@Model.Card?.ClientCardId" required />
+            <input id="diag-id" type="hidden" name="DiagId" required /> <br />
+            
+            <div class="flex-unit gap">
+                <div>
+                    <label for="mkb-code">MKB code</label>
+                    <input type="text" name="mkb-code" id="mkb-code" maxlength="3" />
+                    <span><button id="diag-find">Найти</button></span> <br />
+                    <span>Диагноз: </span><span id="diag-name"></span>
+                </div>
+                <div>
+                    <label for="DocServId">Оказанная услуга</label>
+                    <select asp-items="ViewBag.Services" name="ServId" id="services"></select><br />
+                    <span>Цена: </span><span id="serv-priсe"></span>
+                </div>
+            </div>
+
+            <input type="hidden" name="Course" id="course" required />
+            <textarea placeholder="Напишите курс лечения здесь" id="txt" rows="7" cols="89"></textarea> <br/>
+
+            <input type="hidden" name="Price" value="" id="doc-serv-price" />
+           
+        </form>
+        <button id="end-app">Завершить прием</button>
+    </div>
+</dic>
+
+    <script type="text/javascript">
+        
+        let mkbBut = document.getElementById("diag-find");
+        mkbBut.addEventListener("click", (e) => {
+            console.log(document.getElementById("mkb-code").value);
+            getDiag(document.getElementById("mkb-code").value);
+            e.preventDefault();
+        });
+
+        async function getDiag(name) {
+            let result = await fetch('/Doctor/GetDiag/?mkbCode=' + name, {
+                method: "GET"
+            });
+            if (result.ok) {
+                let data = await result.json();
+                if (data != null) {
+                    document.getElementById("diag-name").innerHTML = data.diagName;
+                    document.getElementById("diag-id").value = data.diagId;
+                } else {
+                    document.getElementById("diag-name").innerHTML = "Нет такого диагноза!";
+                    document.getElementById("diag-id").value = "";
+                }
+            }
+        }
+
+        
+
+        let txt = document.getElementById("txt");
+        let serv = document.getElementById("services");
+        let course = document.getElementById("course");
+        let diag = document.getElementById("diag-id");
+        let form = document.getElementById("form");
+
+
+        getPrice(serv.options[serv.selectedIndex].value);
+
+        serv.addEventListener("change", (e) => {
+            console.log(serv.options[serv.selectedIndex].value);
+            getPrice(serv.options[serv.selectedIndex].value);
+        })
+
+        async function getPrice(id) {
+            let result = await fetch('/Doctor/GetPrice/?servId=' + id, {
+                method: "GET"
+            });
+            if (result.ok) {
+                let data = await result.json();
+                if (data != null) {
+                    if (@discount != 0) {
+                        document.getElementById("doc-serv-price").value = data - (data * (@discount / 100));
+                        document.getElementById("serv-priсe").innerHTML = data - (data * (@discount / 100));
+                    }
+                    else {
+                        document.getElementById("doc-serv-price").value = data;
+                        document.getElementById("serv-priсe").innerHTML = data;
+                    }
+                }
+                else {
+                    document.getElementById("doc-serv-price").value = "";
+                    document.getElementById("serv-priсe").innerHTML = "Нет цены на данную услугу";
+                }
+            }
+        }
+
+        document.getElementById("end-app").addEventListener("click", (e) => {
+            course.value = txt.value;
+            if (@Convert.ToInt16(cardInvalid) == 1) {
+                alert("У пациента нет мед. книжки!");
+                e.preventDefault();
+                return;
+            }
+            if (diag.value == "") {
+                alert("Назначьте диагноз!");
+                e.preventDefault();
+                return;
+            } 
+            if (course.value == "") {
+                alert("Назначьте пациенту курс лечения!");
+                e.preventDefault();
+                return;
+            }
+            form.submit();
+            
+        })
+
+    </script>

@@ -1,0 +1,33 @@
+﻿@model Health.Models.Login
+
+@{
+    ViewData["Title"] = "Вход";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/index.css" />
+}
+<div class="index-otch">
+   
+    <form asp-controller="Auth" asp-action="Login" method="post" class="form log">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-unit">
+            <div>
+            <label asp-for="Log" class="control-label">Login</label><br />
+            <input asp-for="Log" class="form-control">
+            <span asp-validation-for="Log"></span>
+            </div>
+            <div>
+
+            @Html.Label("Password", "Пароль")<br />
+            @Html.Password("Password")
+            <span asp-validation-for="Password"></span>
+            </div>
+        </div><br />
+
+        <div class="form-unit">
+            <input type="submit" value="Войти" class="btn btn-primary" />
+        </div>
+    </form>
+    <span>@ViewBag.Info</span>
+
+</div>

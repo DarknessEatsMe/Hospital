@@ -1,0 +1,74 @@
+﻿@model Health.Models.PersonInfo;
+@{
+    ViewData["Title"] = "Создание карточки пациента";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/index.css" />
+}
+<div class="index-otch">
+
+    <form asp-controller="Doctor" asp-action="CreateCard" method="post" class="form log">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-unit">
+            <input name="TicketId" id="TicketId" type="text" value="@ViewBag.TicketId" class="form-control" required maxlength="10" style="display:none">
+        </div> <br />
+
+        <div class="form-unit">
+            <div>
+                <label for="CardNum" class="control-label">Номер карточки</label>
+                <input name="CardNum" id="CardNum" type="text" class="form-control" required maxlength="10"><br />
+                <span >@ViewBag.CardExist</span>
+            </div>
+            <div>
+                <label asp-for="FName" class="control-label">Фамилия</label>
+                <input asp-for="FName" id="FName" type="text" value="@Model.FName" class="form-control"><br />
+                <span asp-validation-for="FName"></span>
+            </div>
+            <div>
+                <label asp-for="SName" class="control-label">Имя</label>
+                <input asp-for="SName" id="SName" type="text" value="@Model.SName" class="form-control"><br />
+                <span asp-validation-for="SName"></span>
+            </div>
+            <div>
+                <label asp-for="FatherName" class="control-label">Отчество</label>
+                <input asp-for="FatherName" id="FatherName" type="text" value="@Model.FatherName" class="form-control"><br />
+                <span asp-validation-for="FatherName"></span>
+            </div>
+            <div>
+                <label asp-for="Birthday" class="control-label">Дата рождения</label>
+                <input asp-for="Birthday" id="BirthDay" type="date" value="@Model.Birthday.ToString("O")" class="form-control"><br />
+                <span asp-validation-for="Birthday"></span>
+            </div>
+            <div>
+                <label asp-for="PassNum" class="control-label">Номер паспорта</label>
+                <input asp-for="PassNum" id="PassNum" type="text" value="@Model.PassNum" class="form-control" maxlength="4" readonly><br />
+                <span asp-validation-for="PassNum"></span>
+            </div>
+            <div>
+                <label asp-for="PassSeries" class="control-label">Серия паспорта</label>
+                <input asp-for="PassSeries" id="PassSeries" type="text" value="@Model.PassSeries" class="form-control" readonly><br />
+                <span asp-validation-for="PassSeries"></span>
+            </div>
+            <div>
+                <label asp-for="Sex" class="control-label">Пол</label>
+                <select asp-for="Sex" id="Sex" class="form-control" asp-items="ViewBag.Sex"></select><br />
+                <span asp-validation-for="Sex"></span>
+            </div>
+            <div>
+                <label asp-for="Adress" class="control-label">Адрес проживания</label>
+                <input asp-for="Adress" id="Adress" type="text" class="form-control"><br />
+                <span asp-validation-for="Adress"></span>
+            </div>
+            <div>
+                <label asp-for="Discount" class="control-label">Скидка (%)</label>
+                <input asp-for="Discount" id="Adress" type="text" class="form-control" maxlength="2"><br />
+                <span asp-validation-for="Discount"></span>
+            </div>
+        </div> <br />
+
+        <div class="form-unit">
+            <input id="create-info" type="submit" value="Создать" class="btn btn-primary" />
+        </div>
+    </form>
+ </div>

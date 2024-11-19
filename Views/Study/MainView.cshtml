@@ -1,0 +1,19 @@
+﻿@model Health.Models.Diagnosis
+
+<div class="unit">
+    @using (Html.BeginForm("MainView", "Study", FormMethod.Post))
+    {
+        @using(Html.BeginForm())
+        {
+            <p>
+                @Html.TextBox("DiagName")
+
+            </p>
+            <p>
+                @Html.TextBox("MkbCode")
+
+            </p>
+            <input type="submit" />
+        }
+    }
+</div>

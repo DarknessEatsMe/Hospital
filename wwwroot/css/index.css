@@ -1,0 +1,128 @@
+﻿body {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+.index {
+    display: flex;
+    justify-content: start;
+
+    column-gap: 10px;
+    padding: 10px 25px 0 25px;
+}
+.index-otch {
+    display: flex;
+    justify-content: center;
+    column-gap: 10px;
+    padding: 10px 25px 0 25px;
+}
+p {
+    font-size: 20pt;
+    font-weight: 800;
+}
+
+a {
+    text-decoration: none;
+    font-size: 14pt;
+    color: darkblue;
+    font-weight: 600;
+}
+a:hover {
+    color: dodgerblue;
+}
+a:visited {
+    text-decoration: none;
+    color: darkblue;
+}
+a:visited:hover {
+    text-decoration: none;
+    color: dodgerblue;
+}
+
+.hr-otch {
+    height: 100%
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+}
+.form-unit {
+    display: flex;
+    flex-direction: column;
+    column-gap: 10px;
+    justify-content: center;
+    align-items:end;
+    row-gap: 10px;
+    margin: 0 5px 0 5px;
+}
+.log {
+    margin-top: 30px;
+    border: 5px solid darkblue;
+    border-radius: 25px;
+    padding: 50px 30px 50px 30px;
+}
+.table {
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;  
+}
+.table thead {
+    background: linear-gradient(45deg, darkblue, dodgerblue);
+}
+.table thead th {
+    font-weight: bold;
+    color: white;
+    text-align: left;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+}
+.table tbody td {
+    text-align: left;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: 600;
+    vertical-align: top;
+}
+.table thead tr th:first-child, .table tbody tr td:first-child {
+    border-left: none;
+}
+.table thead tr th:last-child, .table tbody tr td:last-child {
+    border-right: none;
+}
+.table tbody tr:nth-child(even) {
+    background: #f3f3f3;
+}
+
+.flex-unit {
+    display: flex;
+    justify-content: left;
+    align-items: start;
+}
+.col {
+    flex-direction: column;
+}
+.row {
+    flex-direction: row;
+}
+.left {
+    justify-content: start;
+    align-items: start;
+}
+.gap {
+    column-gap: 10px;
+    row-gap: 10px;
+}
+
+
+.info {
+    font-size: 14pt;
+    font-weight: 400;
+}

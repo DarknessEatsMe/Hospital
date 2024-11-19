@@ -1,0 +1,23 @@
+﻿@model Health.Models.Ticket;
+@{
+    ViewData["Title"] = "Все талоны";
+    Diagnosis diagnose = new Diagnosis();
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/index.css" />
+}
+<div class="index-otch">
+    <div class="unit">
+        @using (Html.BeginForm("MainView", "Study", FormMethod.Post))
+        {
+            @Html.TextBox("DiagName")
+            @Html.TextBox("MkbCode")
+            
+            <div class="unitt">
+                <hr class="hr-otch" />
+            </div>
+            @Html.TextBox("SpecName")
+            <input type="submit" />
+        }
+    </div>
+</div>

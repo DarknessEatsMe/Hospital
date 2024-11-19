@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewData["Title"] = "Создание доктора";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/index.css" />
+}
+<div class="index-otch">
+    <div class="unit">
+        @using (Html.BeginForm("DocCreation", "Study", FormMethod.Post))
+        {
+            <div class="form-unit">
+                <div>
+                @Html.Label("FName", "Фамилия")
+                @Html.TextBox("FName")
+                </div>
+                <div>
+                @Html.Label("SName", "Имя")
+                @Html.TextBox("SName")
+                </div>
+                <div>
+                @Html.Label("FatherName", "Отчество")
+                @Html.TextBox("FatherName")
+                </div>
+                <div>
+                @Html.Label("PassNum", "Номер паспорта")
+                @Html.TextBox("PassNum")
+                </div>
+                <div>
+                @Html.Label("PassSeries", "Серия")
+                @Html.TextBox("PassSeries")
+                </div>
+                <div>
+                @Html.Label("Birthday", "День Рождения")
+                    @Html.TextBox("Birthday", "", new { type = "date" })
+                </div>
+                <div>
+                @Html.Label("Sex", "Пол")
+                @Html.DropDownList("Sex", ViewBag.Sex as SelectList)
+                </div>
+                <div>
+                @Html.Label("Adress", "Адресс")
+                @Html.TextBox("Adress")
+                </div>
+                <div>
+                @Html.Label("Discount", "Скидка (%)")
+                    @Html.TextBox("Discount", "0", new { type = "number" })
+                </div>
+                <div>
+                    @Html.Hidden("PersonInfoId", "0")
+                </div>
+                <div>
+                    @Html.Label("SpecId", "Спец")
+                    @Html.DropDownList("SpecId", ViewBag.SpecId as SelectList)
+                </div>
+                <div>
+                    @Html.Label("CatId", "Категория")
+                    @Html.DropDownList("CatId", ViewBag.CatId as SelectList)
+                </div>
+            </div>
+            <div class="unit">
+                <hr class="hr-otch" />
+            </div>
+            <input type="submit" />
+        }
+    </div>
+</div>

@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Главная страница";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/index.css" />
+}
+<!DOCTYPE html>
+
+<div class="index col">
+<p>Сотрудникам</p>
+<ul>
+    <li>
+        <a class="index-a" asp-controller="Auth" asp-action="Login">Личный кабинет врача</a> <br />
+    </li>
+    <li>
+        <a class="index-a" asp-controller="Auth" asp-action="Exit">Выйти из системы</a> <br />
+    </li>
+    <li>
+        <a class="index-a" asp-controller="Doctor" asp-action="Money">Посмотреть выручку</a> <br />
+    </li>
+    <li>
+        <a class ="index-a" asp-controller="Doctor" asp-action="WorkLoad">Посмотреть нагрузку</a> <br />
+    </li>
+    <li>
+        <a class="index-a" asp-controller="Doctor" asp-action="GetDiagnoses">Справочник диагнозов</a> <br />
+    </li>
+</ul>
+<p>Клиентам</p>
+<ul>
+    <li>
+        <a class="index-a" asp-controller="User" asp-action="GetTicket">Записаться на прием</a>
+    </li>
+    <li>
+        <a class="index-a" asp-controller="Home" asp-action="GetAllTickets">Список всех приемов</a>
+    </li>
+</ul>
+<p>Учусь</p>
+<ul>
+    <li>
+        <a class="index-a" asp-controller="Study" asp-action="MainView">Добавление диагноза</a>
+    </li>
+    <li>
+        <a class="index-a" asp-controller="Study" asp-action="Diagnoses">Диагнозы</a>
+    </li>
+    <li>
+        <a class="index-a" asp-controller="Study" asp-action="DocCreation">Добавить доктора</a>
+    </li>
+    </ul>
+</div>

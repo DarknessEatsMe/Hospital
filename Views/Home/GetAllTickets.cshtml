@@ -1,0 +1,61 @@
+﻿@model List<dynamic>;
+@{
+    ViewData["Title"] = "Все талоны";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/index.css" />
+}
+<div class="index-otch">
+    <div class="unit">
+        <form asp-action="GetAllTickets" asp-controller="Home" method="post" class="form">
+        <div class="form-unit">
+            <div>
+                <label for="SName">Имя: </label>
+                        <input type="text" name="SName" id="from" value="@ViewBag.SName" required />
+            </div>
+            <div>
+                <label for="FName">Фамилия: </label>
+                <input type="text" name="FName" id="to" value="@ViewBag.FName" required /> 
+            </div>
+        </div>
+        <br />
+        <div class="form-unit">
+            <input type="submit" id="find" value="Загрузить отчет" />
+        </div>
+    </form>
+    </div>
+    
+    <div class="unitt">
+        <hr class="hr-otch" />
+    </div>
+
+    <div class="unit">
+        <table class="table">
+        <thead>
+            <tr>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>Дата Рождения</th>
+                <th>Дата получения</th>
+                <th>Дата приема</th>
+                <th>Врач</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var ticket in Model)
+            {
+                <tr>
+                    <td>@ticket.FName</td>
+                    <td>@ticket.SName</td>
+                    <td>@ticket.FatherName</td>
+                    <td>@ticket.Birthday</td>
+                    <td>@ticket.IssueDate.ToString("f")</td>
+                    <td>@ticket.AppDate.ToString("f")</td>
+                    <td>@ticket.SpecName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+</div>

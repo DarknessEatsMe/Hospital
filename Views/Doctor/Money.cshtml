@@ -1,0 +1,37 @@
+﻿@using Health.ViewModels;
+@model List<Money>;
+
+@{
+    ViewData["Title"] = "Выручка";
+    int? sum = 0;
+    @foreach (var item in Model)
+    {
+        sum += item.Price;
+    }
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/index.css" />
+}
+<div class="index-otch">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Услуга</th>
+                <th>Выручка, руб.</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Price</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="index-otch">
+    <span style="font-weight: 800" id="sum">ИТОГО: </span><span>@sum руб.</span>
+</div>
